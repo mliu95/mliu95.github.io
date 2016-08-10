@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Creating an online multiplayer web game using Socket.io and Quintus Part 1 | Liucode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="One of my coworkers introduced me to Quintus, a young Javascript engine that makes developing simple games a breeze. In this multipart tutorial I’ll be showing you how to combine Quintus with Socket.i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 1">
+<meta property="og:url" content="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/index.html">
+<meta property="og:site_name" content="Liucode">
+<meta property="og:description" content="One of my coworkers introduced me to Quintus, a young Javascript engine that makes developing simple games a breeze. In this multipart tutorial I’ll be showing you how to combine Quintus with Socket.i">
+<meta property="og:image" content="http://mliu95.github.io/voila.png">
+<meta property="og:updated_time" content="2016-08-10T08:59:13.537Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 1">
+<meta name="twitter:description" content="One of my coworkers introduced me to Quintus, a young Javascript engine that makes developing simple games a breeze. In this multipart tutorial I’ll be showing you how to combine Quintus with Socket.i">
+<meta name="twitter:image" content="http://mliu95.github.io/voila.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Liucode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Liucode</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A blog by Michael Liu</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://mliu95.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/" class="article-date">
+  <time datetime="2014-07-13T21:17:56.000Z" itemprop="datePublished">2014-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Creating an online multiplayer web game using Socket.io and Quintus Part 1
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>One of my coworkers introduced me to <a href="http://html5quintus.com/" target="_blank" rel="external">Quintus</a>, a young Javascript engine that makes developing simple games a breeze. In this multipart tutorial I’ll be showing you how to combine Quintus with Socket.io to make a simple multiplayer game.</p>
+<h2 id="Installation-and-setup"><a href="#Installation-and-setup" class="headerlink" title="Installation and setup"></a>Installation and setup</h2><h3 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h3><p>We’ll be using Node.js for our runtime environment. It’s super fast to pick up and start developing with, and works great for our multiplayer game. If you don’t yet have it installed, go to their <a href="http://nodejs.org/" target="_blank" rel="external">website for the installation link</a>.</p>
+<h3 id="Getting-the-proper-node-modules"><a href="#Getting-the-proper-node-modules" class="headerlink" title="Getting the proper node modules"></a>Getting the proper node modules</h3><p>Now that we have Node.js installed, let’s create the folder where our game will be located.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ mkdir quintus-tag</div><div class="line">$ <span class="built_in">cd</span> quintus-tag</div></pre></td></tr></table></figure>
+<p>Once inside, we’ll create a <code>package.json</code> file, which will hold information about our Node.js application.</p>
+<figure class="highlight json"><figcaption><span>package.json</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"repository"</span>: &#123;</div><div class="line">    <span class="attr">"type"</span>: <span class="string">"git"</span>,</div><div class="line">    <span class="attr">"url"</span>: <span class="string">"git@github.com:mliu95/quintus-tag.git"</span></div><div class="line">  &#125;,</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"quintus-tag"</span>,</div><div class="line">  <span class="attr">"author"</span>: <span class="string">"Michael Liu"</span>,</div><div class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.1"</span>,</div><div class="line">  <span class="attr">"dependencies"</span>: &#123;&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now to install express and socket.io, which will handle the routing/server and multiplayer respectively.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install --save express</div><div class="line">$ npm install --save socket.io</div></pre></td></tr></table></figure>
+<p>By including the <code>--save</code> in our install calls, our <code>package.json</code> file will automatically update its <code>dependencies</code> object.</p>
+<p>Now that we have our necessary modules, let’s set up our webserver with Express and Socket.io…</p>
+<a id="more"></a>
+<h2 id="Let’s-get-to-work"><a href="#Let’s-get-to-work" class="headerlink" title="Let’s get to work!"></a>Let’s get to work!</h2><h3 id="Setting-up-our-webserver"><a href="#Setting-up-our-webserver" class="headerlink" title="Setting up our webserver"></a>Setting up our webserver</h3><p>Create a file in your directory called <code>app.js</code>, and place this code inside.</p>
+<figure class="highlight javascript"><figcaption><span>app.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line"><span class="keyword">var</span> server = <span class="built_in">require</span>(<span class="string">'http'</span>).Server(app);</div><div class="line"><span class="keyword">var</span> io = <span class="built_in">require</span>(<span class="string">'socket.io'</span>)(server);</div><div class="line"> </div><div class="line">app.use(express.static(__dirname + <span class="string">'/public'</span>));</div><div class="line"> </div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">  res.render(<span class="string">'/index.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">server.listen(<span class="number">80</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Multiplayer app listening on port 80"</span>);</div></pre></td></tr></table></figure>
+<p>Let’s go through what this file does.</p>
+<p><strong>Lines 1-4:</strong> Here we set up our Express server and also our Socket.io engine on top of that server.</p>
+<p><strong>Line 6:</strong> I plan to include all of our application code inside of a <code>/public</code> directory, and instead of inserting <code>/public</code> in front of all my files/requires, I tell Express to use <code>/public</code> as the home directory</p>
+<p><strong>Lines 8-10:</strong> Because our game’s going to be a single page application, our Express routing will be dead simple. In our case right now whenever we get a request to display whatever is on <code>localhost:80</code> (Which is also <code>localhost</code>), our app will serve up the <code>/public/index.html</code> page (Note that we don’t have to include <code>/public</code> because of our code in <strong>Line 6</strong>)</p>
+<p><strong>Lines 12-13:</strong> Now we’ll tell our server to listen on port 80, and log a message to the console so we know everything is working just fine.</p>
+<p>If we run our server now, we’re going to see an error page display complaining about an html module. That’s because we haven’t yet created our <code>/public</code> folder with the <code>index.html</code> file inside of it. Feel free to do it now, don’t worry about <code>index.html</code> being blank. If everything is working you should see a blank webpage! Soon enough, we’ll be turning this webpage into our Quintus game.</p>
+<h3 id="Setting-up-Quintus"><a href="#Setting-up-Quintus" class="headerlink" title="Setting up Quintus"></a>Setting up Quintus</h3><p>Before we start, let’s import the javascript libraries we’ll be using.</p>
+<p>In the public directory, create a <code>lib</code> folder which will hold the Quintus engine, RequireJS library, and any other libraries you might want to use in your games.</p>
+<p><a href="http://cdn.html5quintus.com/v0.2.0/quintus-all.js" target="_blank" rel="external">Download the Quintus library file here and save it inside the lib folder</a></p>
+<p><a href="http://requirejs.org/docs/release/2.1.14/minified/require.js" target="_blank" rel="external">Download the RequireJS library file here and save it inside the lib folder</a></p>
+<p>Now, let’s go into our <code>index.html</code> file we created in the previous section and add some script tags to link to our future Quintus game.</p>
+<figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"lib/quintus-all.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"socket.io/socket.io.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/lib/require.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"src/game.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>Note: for anyone curious about the Socket.io script link, Socket.io will automatically intercept requests for <code>socket.io/socket.io.js</code> and send the appropriate response. <a href="http://stackoverflow.com/questions/8689877/cant-find-socket-io-js" target="_blank" rel="external">More info here.</a></p>
+<p>Now let’s make a folder called <code>src</code> in our public directory and create a new javascript file called <code>game.js</code>. This file will house our Quintus engine and communicate with Socket.io.</p>
+<figure class="highlight javascript"><figcaption><span>game.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Q = Quintus(&#123;audioSupported: [ <span class="string">'wav'</span>,<span class="string">'mp3'</span> ]&#125;)</div><div class="line">      .include(<span class="string">'Sprites, Scenes, Input, 2D, Anim, Touch, UI, Audio'</span>)</div><div class="line">      .setup(&#123; maximize: <span class="literal">true</span> &#125;)</div><div class="line">      .enableSound()</div><div class="line">      .controls().touch();</div><div class="line"> </div><div class="line">Q.gravityY = <span class="number">0</span>;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> objectFiles = [</div><div class="line">  <span class="string">'./src/player'</span></div><div class="line">];</div><div class="line"> </div><div class="line"><span class="built_in">require</span>(objectFiles, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  Q.scene(<span class="string">'arena'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">stage</span>) </span>&#123;</div><div class="line">    stage.collisionLayer(<span class="keyword">new</span> Q.TileLayer(&#123; dataAsset: <span class="string">'/maps/arena.json'</span>, sheet: <span class="string">'tiles'</span> &#125;));</div><div class="line"> </div><div class="line">    <span class="keyword">var</span> player = stage.insert(<span class="keyword">new</span> Q.Player(&#123; x: <span class="number">100</span>, y: <span class="number">100</span> &#125;));</div><div class="line">    stage.add(<span class="string">'viewport'</span>).follow(player);</div><div class="line">  &#125;);</div><div class="line"> </div><div class="line">  <span class="keyword">var</span> files = [</div><div class="line">    <span class="string">'/images/tiles.png'</span>,</div><div class="line">    <span class="string">'/maps/arena.json'</span>,</div><div class="line">    <span class="string">'/images/sprites.png'</span>,</div><div class="line">    <span class="string">'/images/sprites.json'</span></div><div class="line">  ];</div><div class="line"> </div><div class="line">  Q.load(files.join(<span class="string">','</span>), <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    Q.sheet(<span class="string">'tiles'</span>, <span class="string">'/images/tiles.png'</span>, &#123; tilew: <span class="number">32</span>, tileh: <span class="number">32</span> &#125;);</div><div class="line">    Q.compileSheets(<span class="string">'/images/sprites.png'</span>, <span class="string">'/images/sprites.json'</span>);</div><div class="line">    Q.stageScene(<span class="string">'arena'</span>, <span class="number">0</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>Lines 1-5:</strong> Here we create our Quintus engine. For those curious on what other libraries there are or how this works, I recommend the <a href="http://html5quintus.com/guide/core.md#.U8bVQK1dVQ8" target="_blank" rel="external">Quintus documentation</a></p>
+<p><strong>Line 7:</strong> Because we’re going to be making a top down style tag game, we need to disable gravity.</p>
+<p><strong>Lines 9-11:</strong> Sourcing our custom Quintus classes that we’ll be using in the game.</p>
+<p><strong>Line 14:</strong> Here we create our main game stage.</p>
+<p><strong>Line 15:</strong> We use a built in Quintus function to create the walls of our game from a JSON object. <a href="arena.json">If you need a sample JSON object, here’s a download link</a></p>
+<p><strong>Line 17:</strong> Creating a new Player class (Which we’ll be making later on in this post) and inserting it into the stage with initial coordinates (100, 100).</p>
+<p><strong>Line 18:</strong> Telling our stage to center the view around the player class.</p>
+<p><strong>Lines 21-26:</strong> Listing all of the assets we’ll need for our game.</p>
+<p><strong>Lines 28-32:</strong> Here we tell the Quintus engine to load all of our spritesheets and create the <code>arena</code> scene we made earlier. I’ve included the download links for all of the images below:</p>
+<p><a href="tiles.png">/images/tiles.png</a></p>
+<p><a href="sprites.png">/images/sprites.png</a></p>
+<p><a href="sprites.json">/images/sprites.json</a></p>
+<h3 id="Creating-the-Player-class"><a href="#Creating-the-Player-class" class="headerlink" title="Creating the Player class"></a>Creating the Player class</h3><p>The last thing we’ll have to do to have a basic Quintus game is create our Player class. In your <code>src</code> folder create a javscript file called <code>Player.js</code>.</p>
+<figure class="highlight javascript"><figcaption><span>player.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([], <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; </div><div class="line">  Q.Sprite.extend(<span class="string">'Player'</span>, &#123;</div><div class="line">    init: <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>._super(p, &#123;</div><div class="line">        sheet: <span class="string">'player'</span></div><div class="line">      &#125;);</div><div class="line"> </div><div class="line">      <span class="keyword">this</span>.add(<span class="string">'2d, platformerControls, animation'</span>);</div><div class="line">    &#125;,</div><div class="line">    step: <span class="function"><span class="keyword">function</span> (<span class="params">dt</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (Q.inputs[<span class="string">'up'</span>]) &#123;</div><div class="line">        <span class="keyword">this</span>.p.vy = <span class="number">-200</span>;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Q.inputs[<span class="string">'down'</span>]) &#123;</div><div class="line">        <span class="keyword">this</span>.p.vy = <span class="number">200</span>;</div><div class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!Q.inputs[<span class="string">'down'</span>] &amp;&amp; !Q.inputs[<span class="string">'up'</span>]) &#123;</div><div class="line">        <span class="keyword">this</span>.p.vy = <span class="number">0</span>;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><strong>Line 2:</strong> Here we create a new class Player that extends the Q.Sprite class.</p>
+<p><strong>Lines 3-6:</strong> The <code>init</code> function is called whenever we make a new Player class. Notice that we take a <code>p</code> parameter, which can be any Javascript object used to set specific properties (Like how we set the initial coordinates for the Player previously). We also can set variables like <code>sheet</code>, which defines what sprite our Player will be using, and saves us time from declaring it each time we make a new Player.</p>
+<p><strong>Line 8:</strong> Here we add some built-in Quintus functionality to our Player class. The <code>2d</code> module let’s our class obey the law of physics and move around. The <code>platformerControls</code> module adds in basic support for moving left, right, and jumping (although we’ll be overriding the jumping later). Finally, the animation module will let us play different animations, which we’ll be using later to show the difference between the tagged players and the non-tagged players.</p>
+<p><strong>Line 10:</strong> The <code>step</code> function is called by the Quintus engine to update the Player class, and which we’ll be using to add some basic functionality to our Player class.</p>
+<p><strong>Lines 11-17:</strong> Since the <code>platformerControls</code> doesn’t fully work with our top down style game, we do it ourselves in the <code>step</code> function. Quintus by default provides <a href="http://html5quintus.com/guide/input.md#.U8fn661dVQ8" target="_blank" rel="external">mapping for the directional keys and more</a>, so we can simply look at if the <code>up</code> or <code>down</code> arrow is being pressed, and adjust the y-velocity property of the Player accordingly. (Note: Any properties of a class are stored within its <code>p</code> object).</p>
+<p>And that’s all there is to it! Now let’s run our game server and see if it works:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> quintus-tag</div><div class="line">$ node app.js</div></pre></td></tr></table></figure>
+<p>Then open up your web browser and go to <code>localhost:8080</code>. If everything’s working, you should see something like this:</p>
+<p><img src="voila.png" alt="Whoa!"></p>
+<p>Boom! Our player can move in all directions and collides with the walls. In the next part of this tutorial, we’ll start looking into integrating our Quintus game with Socket.io. <a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2">Check it out here!</a> Thanks for reading!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/" data-id="ciroop6h800008gvfekpdrb7k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tutorial/">Tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Creating an online multiplayer web game using Socket.io and Quintus Part 2
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/07/13/Hello,-World!/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello, World! It&#39;s Michael.</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friendship/">Friendship</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MHacks/">MHacks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Myo/">Myo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oculus-Rift/">Oculus Rift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pennapps/">Pennapps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ping-ping/">Ping ping</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Progress/">Progress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurgeonSimulator/">SurgeonSimulator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/">Tutorial</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wearable/">Wearable</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Friendship/" style="font-size: 10px;">Friendship</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/MHacks/" style="font-size: 10px;">MHacks</a> <a href="/tags/Myo/" style="font-size: 15px;">Myo</a> <a href="/tags/Node-js/" style="font-size: 20px;">Node.js</a> <a href="/tags/Oculus-Rift/" style="font-size: 10px;">Oculus Rift</a> <a href="/tags/Pennapps/" style="font-size: 10px;">Pennapps</a> <a href="/tags/Ping-ping/" style="font-size: 10px;">Ping ping</a> <a href="/tags/Progress/" style="font-size: 10px;">Progress</a> <a href="/tags/Quintus/" style="font-size: 20px;">Quintus</a> <a href="/tags/Socket-io/" style="font-size: 20px;">Socket.io</a> <a href="/tags/SurgeonSimulator/" style="font-size: 10px;">SurgeonSimulator</a> <a href="/tags/Tutorial/" style="font-size: 20px;">Tutorial</a> <a href="/tags/Unity/" style="font-size: 15px;">Unity</a> <a href="/tags/Wearable/" style="font-size: 10px;">Wearable</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/10/On-Friendship/">On Friendship</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/sprites/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/arena/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/24/Pennapps-2015/">Pennapps 2015</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/">Creating an online multiplayer web game using Socket.io and Quintus Part 3</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Michael Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

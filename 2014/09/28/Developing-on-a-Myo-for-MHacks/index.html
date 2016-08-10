@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Developing on a Myo for MHacks | Liucode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Last week for the hackathon MHacks 2014 I was fortunate enough to snag a Myo by ThalmicLabs to develop some cool hacks on. Check out the youtube videos below!
+  
+
+How I did it:For Myo scripts you can">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Developing on a Myo for MHacks">
+<meta property="og:url" content="http://mliu95.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/index.html">
+<meta property="og:site_name" content="Liucode">
+<meta property="og:description" content="Last week for the hackathon MHacks 2014 I was fortunate enough to snag a Myo by ThalmicLabs to develop some cool hacks on. Check out the youtube videos below!
+  
+
+How I did it:For Myo scripts you can">
+<meta property="og:updated_time" content="2016-08-10T08:59:13.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Developing on a Myo for MHacks">
+<meta name="twitter:description" content="Last week for the hackathon MHacks 2014 I was fortunate enough to snag a Myo by ThalmicLabs to develop some cool hacks on. Check out the youtube videos below!
+  
+
+How I did it:For Myo scripts you can">
+  
+    <link rel="alternate" href="/atom.xml" title="Liucode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Liucode</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A blog by Michael Liu</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://mliu95.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Developing-on-a-Myo-for-MHacks" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/28/Developing-on-a-Myo-for-MHacks/" class="article-date">
+  <time datetime="2014-09-28T21:26:20.000Z" itemprop="datePublished">2014-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Developing on a Myo for MHacks
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Last week for the hackathon MHacks 2014 I was fortunate enough to snag a <a href="https://www.thalmic.com/en/myo/" target="_blank" rel="external">Myo by ThalmicLabs</a> to develop some cool hacks on. Check out the youtube videos below!</p>
+<div class="video-container"><iframe src="//www.youtube.com/embed/bU8y1CbwL-s" frameborder="0" allowfullscreen></iframe></div>  
+<div class="video-container"><iframe src="//www.youtube.com/embed/d32xxLw_tP8" frameborder="0" allowfullscreen></iframe></div>
+<h2 id="How-I-did-it"><a href="#How-I-did-it" class="headerlink" title="How I did it:"></a>How I did it:</h2><p>For Myo scripts you can use C++ or Lua scripts for Windows &amp; Mac applications, and Java for making Android apps. Writing Lua scripts and the android application was straightforward and relatively painless. There are event listeners given to you for each gesture and you have access to all rotational data from the Myo. It’s a very shallow API so the learning curve was very low.</p>
+<a id="more"></a>
+<p>The Myo Surgeon Simulator hack was pretty tricky to get right. Because the Myo only gives the rotational data and not the movement of the hand (as far as I know), I opted to move the game’s hand a certain direction whenever my rotation exceeded a certain margin away from the origin. I allowed the user to recalibrate where the origin was by listening for a particular gesture.</p>
+<p>Since the Lua script allowed you to send keypresses but not mouse data, I ran a macro program that listened for certain key combinations and gave the mouse a certain acceleration as a result. These key combinations would be sent from my Lua script. I was stumped for an hour or two since mouse movement was working fine, but Surgeon Simulator wouldn’t recognize any movements. Turns out the game reads movement based on mouse acceleration and not mouse movement. A short googling and guess + test session yielded the correct macro.</p>
+<p>The Myo can tell when you’re making a fist, but not when individual fingers are being bent. As a result, when I recognized the fist gesture, I had the Lua script press down all the necessary keys to make the game’s hand grab onto objects.</p>
+<p>The Android application (apologies for the video quality!) let you map custom movements to a sound. By selecting a sound and performing a specific gesture to indicate the start of the motion, the app would begin storing all rotational information until the aforementioned gesture was made again. From then on, the user could perform a gesture and if it was within a certain threshold of error from the closest mapped motion, the sound associated with that motion was played.</p>
+<p>While my data was being correctly stored and motions were being properly compared, the Myo would sometimes shift all of its rotation data. This could be caused by it moving around on my arm or quick jerking motions. The next improvement I would make to my application would be to reset the frame of reference for the rotation whenever the user wanted to perform a gesture. This would make up for any shifts from the original spot.</p>
+<p>Overall I had a great time playing around with the Myo. It’s an awesome piece of technology and I’m excited to see what people can do with it. Perhaps it could be integrated with the plethora of wearable technology we’re seeing coming out?</p>
+<p>(Note: I’ve included the links for the <a href="https://github.com/mliu95/myo-soundboard" target="_blank" rel="external">Myo Soundboard</a> and the <a href="https://github.com/mliu95/myo-surgeonsimulator" target="_blank" rel="external">Myo Surgeon Simulator</a>. Feel free to fork and pick up where I left off!)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://mliu95.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/" data-id="ciroop6hr00048gvfh246jggq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MHacks/">MHacks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Myo/">Myo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SurgeonSimulator/">SurgeonSimulator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wearable/">Wearable</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/09/30/Learning-Unity/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Learning Unity
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Creating an online multiplayer web game using Socket.io and Quintus Part 2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friendship/">Friendship</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MHacks/">MHacks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Myo/">Myo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oculus-Rift/">Oculus Rift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pennapps/">Pennapps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ping-ping/">Ping ping</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Progress/">Progress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurgeonSimulator/">SurgeonSimulator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/">Tutorial</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wearable/">Wearable</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Friendship/" style="font-size: 10px;">Friendship</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/MHacks/" style="font-size: 10px;">MHacks</a> <a href="/tags/Myo/" style="font-size: 15px;">Myo</a> <a href="/tags/Node-js/" style="font-size: 20px;">Node.js</a> <a href="/tags/Oculus-Rift/" style="font-size: 10px;">Oculus Rift</a> <a href="/tags/Pennapps/" style="font-size: 10px;">Pennapps</a> <a href="/tags/Ping-ping/" style="font-size: 10px;">Ping ping</a> <a href="/tags/Progress/" style="font-size: 10px;">Progress</a> <a href="/tags/Quintus/" style="font-size: 20px;">Quintus</a> <a href="/tags/Socket-io/" style="font-size: 20px;">Socket.io</a> <a href="/tags/SurgeonSimulator/" style="font-size: 10px;">SurgeonSimulator</a> <a href="/tags/Tutorial/" style="font-size: 20px;">Tutorial</a> <a href="/tags/Unity/" style="font-size: 15px;">Unity</a> <a href="/tags/Wearable/" style="font-size: 10px;">Wearable</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/10/On-Friendship/">On Friendship</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/sprites/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/arena/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/24/Pennapps-2015/">Pennapps 2015</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/">Creating an online multiplayer web game using Socket.io and Quintus Part 3</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Michael Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

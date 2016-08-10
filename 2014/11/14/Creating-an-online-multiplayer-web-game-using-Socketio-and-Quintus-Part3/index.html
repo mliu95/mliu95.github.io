@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Creating an online multiplayer web game using Socket.io and Quintus Part 3 | Liucode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Here’s a quick demo of our finished game:
+
+
+Last post, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the fina">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 3">
+<meta property="og:url" content="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/index.html">
+<meta property="og:site_name" content="Liucode">
+<meta property="og:description" content="Here’s a quick demo of our finished game:
+
+
+Last post, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the fina">
+<meta property="og:updated_time" content="2016-08-10T08:59:13.663Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 3">
+<meta name="twitter:description" content="Here’s a quick demo of our finished game:
+
+
+Last post, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the fina">
+  
+    <link rel="alternate" href="/atom.xml" title="Liucode" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Liucode</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">A blog by Michael Liu</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://mliu95.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/" class="article-date">
+  <time datetime="2014-11-15T03:52:38.000Z" itemprop="datePublished">2014-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Creating an online multiplayer web game using Socket.io and Quintus Part 3
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Here’s a quick demo of our finished game:</p>
+<iframe style="width:98%;" height="500" src="http://104.167.115.218:8080/" allowfullscreen></iframe>
+
+<p><a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2">Last post</a>, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the final part of our app, which is adding the code to let our players tag each other.</p>
+<h2 id="Player-Class"><a href="#Player-Class" class="headerlink" title="Player Class"></a>Player Class</h2><p>Let’s add some properties and event listeners to our player class</p>
+<figure class="highlight javascript"><figcaption><span>player.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">Q.Sprite.extend(<span class="string">'Player'</span>, &#123;</div><div class="line">    init: <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>._super(p, &#123;</div><div class="line">        sheet: <span class="string">'player'</span>,</div><div class="line">        tagged: <span class="literal">false</span>,</div><div class="line">        invincible: <span class="literal">false</span>,</div><div class="line">        vyMult: <span class="number">1</span></div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">this</span>.add(<span class="string">'2d, platformerControls, animation'</span>);</div><div class="line"> </div><div class="line">      <span class="keyword">this</span>.addEventListeners();</div><div class="line">    &#125;,</div><div class="line">    addEventListeners: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.on(<span class="string">'hit'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">collision</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.p.tagged &amp;&amp; collision.obj.isA(<span class="string">'Actor'</span>) &amp;&amp; !collision.obj.p.tagged &amp;&amp; !collision.obj.p.invincible) &#123;</div><div class="line">          <span class="keyword">this</span>.p.socket.emit(<span class="string">'tag'</span>, &#123; playerId: collision.obj.p.playerId &#125;);</div><div class="line">          <span class="keyword">this</span>.p.tagged = <span class="literal">false</span>;</div><div class="line">          <span class="keyword">this</span>.p.sheet = <span class="string">'player'</span>;</div><div class="line">          <span class="keyword">this</span>.p.invincible = <span class="literal">true</span>;</div><div class="line">          <span class="keyword">this</span>.p.opacity = <span class="number">0.5</span>;</div><div class="line">          <span class="keyword">this</span>.p.speed = <span class="number">300</span>;</div><div class="line">          <span class="keyword">this</span>.p.vyMult = <span class="number">1.5</span>;</div><div class="line">          <span class="keyword">var</span> temp = <span class="keyword">this</span>;</div><div class="line">          setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            temp.p.invincible = <span class="literal">false</span>;</div><div class="line">            temp.p.opacity = <span class="number">1</span>;</div><div class="line">            temp.p.speed = <span class="number">200</span>;</div><div class="line">            temp.p.vyMult = <span class="number">1</span>;</div><div class="line">          &#125;, <span class="number">3000</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line"> </div><div class="line">      <span class="keyword">this</span>.on(<span class="string">'join'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.p.invincible = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>.p.opacity = <span class="number">0.5</span>;</div><div class="line">        <span class="keyword">this</span>.p.speed = <span class="number">300</span>;</div><div class="line">        <span class="keyword">this</span>.p.vyMult = <span class="number">1.5</span>;</div><div class="line">        <span class="keyword">var</span> temp = <span class="keyword">this</span>;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          temp.p.invincible = <span class="literal">false</span>;</div><div class="line">          temp.p.opacity = <span class="number">1</span>;</div><div class="line">          temp.p.speed = <span class="number">200</span>;</div><div class="line">          temp.p.vyMult = <span class="number">1</span>;</div><div class="line">        &#125;, <span class="number">3000</span>);</div><div class="line">      &#125;);</div><div class="line">    &#125;,</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<p><strong>Lines 4-7:</strong> Declare some default values for the <code>tagged, invincible, and vyMult</code> properties. We’ll use <code>tagged</code> to tell if a player is tagged or not, <code>invincible</code> to tell if a player is invincible, and <code>vyMult</code> as a variable to increase the y-velocity of a player.</p>
+<p><strong>Line 11:</strong> Add some event listeners to our player when we instantiate our class.</p>
+<p><strong>Lines 14-15:</strong> When a <code>hit</code> event is received, check if the player is tagged, the collision object is an Actor (since hit events are triggered on contact with walls too!), the collided player is not tagged, and finally that the collided player is not invincible.</p>
+<p><strong>Line 16:</strong> Emit a socket.io event <code>tag</code> with the <code>playerId</code> of the collided player. This lets other players know which player was just tagged.</p>
+<p><strong>Lines 17-22:</strong> Set the current player’s <code>tagged</code> state to false. Change their sprite back to a normal player. Give them temporary invincibility. Make them translucent to make it obvious to other players they’re invincible. Give them increased speed on the x-axis. Increase <code>vyMult</code> to 1.5 which also allows the player to move faster on the y-axis.</p>
+<p><strong>Line 23:</strong> Set a temporary variable that we can call after a timeout to revert the invincibility and speed increases we gave the current player.</p>
+<p><strong>Lines 25-28:</strong> Set the player’s invincible state to false. Reset their translucent state. Reset their x-speed and y-speed. This is all within a timeout function that executes after 3 seconds.</p>
+<p><strong>Line 33-44:</strong> When the player first joins the game, we want to give them temporary invincibility and increased speed. This code is copy pasted from the <code>hit</code> event.</p>
+<h2 id="Finishing-up-the-server-code"><a href="#Finishing-up-the-server-code" class="headerlink" title="Finishing up the server code"></a>Finishing up the server code</h2><figure class="highlight javascript"><figcaption><span>app.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> tagged = <span class="literal">false</span>;</div><div class="line"> </div><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;</div><div class="line">  playerCount++;</div><div class="line">  id++;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!tagged) &#123;</div><div class="line">      socket.emit(<span class="string">'connected'</span>, &#123; playerId: id, tagged: <span class="literal">true</span> &#125;);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      socket.emit(<span class="string">'connected'</span>, &#123; playerId: id &#125;);</div><div class="line">    &#125;</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;, <span class="number">1500</span>);</div><div class="line">  </div><div class="line">  socket.on(<span class="string">'disconnect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    playerCount--;</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;);</div><div class="line">  </div><div class="line">  socket.on(<span class="string">'update'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (data[<span class="string">'tagged'</span>]) &#123;</div><div class="line">      tagged = <span class="literal">true</span>;</div><div class="line">    &#125;</div><div class="line">    socket.broadcast.emit(<span class="string">'updated'</span>, data);</div><div class="line">  &#125;);</div><div class="line">  </div><div class="line">  socket.on(<span class="string">'tag'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">    io.emit(<span class="string">'tagged'</span>, data);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"></div><div class="line">setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  tagged = <span class="literal">false</span>;</div><div class="line">&#125;, <span class="number">3000</span>);</div></pre></td></tr></table></figure>
+<p><strong>Line 1:</strong> Declare a boolean <code>tagged</code> variable that will be used to check if there are any taggers currently in the game.</p>
+<p><strong>Line 7:</strong> If tagged is false, make the connected player a tagger.</p>
+<p><strong>Line 9:</strong> Otherwise, simply add them to the game.</p>
+<p><strong>Lines 20-22:</strong> If we receieve any data from a tagger, we can set tagged to true.</p>
+<p><strong>Line 23:</strong> The reason we use a <code>socket.broadcast.emit</code> instead of an <code>io.emit</code> or <code>socket.emit</code> here is because <code>broadcast</code> will send the event to all sockets OTHER than the emitting socket. This makes sense for the update event because we don’t need the server telling us about where our own player is when our client is dealing with our player movement already.</p>
+<p><strong>Lines 26-28:</strong> Server event for when a player is tagged.</p>
+<p><strong>Lines 31-33:</strong> Every 3 seconds, set <code>tagged</code> to false so that if no tagger is emitting data after 3 seconds, the next connecting player should be made the tagger.</p>
+<h2 id="Finishing-the-client-side-game-code"><a href="#Finishing-the-client-side-game-code" class="headerlink" title="Finishing the client side game code"></a>Finishing the client side game code</h2><p>Add these last updates to the game.js file</p>
+<figure class="highlight javascript"><figcaption><span>game.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'socket.io/socket.io.js'</span>]);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> players = [];</div><div class="line"><span class="keyword">var</span> socket = io.connect(<span class="string">'http://localhost:8080'</span>);</div><div class="line"><span class="keyword">var</span> UiPlayers = <span class="built_in">document</span>.getElementById(<span class="string">"players"</span>);</div><div class="line"><span class="keyword">var</span> selfId, player;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> objectFiles = [</div><div class="line">  <span class="string">'./src/player'</span></div><div class="line">];</div><div class="line"> </div><div class="line"><span class="built_in">require</span>(objectFiles, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">function</span> <span class="title">setUp</span> (<span class="params">stage</span>) </span>&#123;</div><div class="line">    socket.on(<span class="string">'count'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      UiPlayers.innerHTML = <span class="string">'Players: '</span> + data[<span class="string">'playerCount'</span>];</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'connected'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      selfId = data[<span class="string">'playerId'</span>];</div><div class="line">      <span class="keyword">if</span> (data[<span class="string">'tagged'</span>]) &#123;</div><div class="line">        player = <span class="keyword">new</span> Q.Player(&#123; playerId: selfId, x: <span class="number">100</span>, y: <span class="number">100</span>, socket: socket &#125;);</div><div class="line">        player.p.sheet = <span class="string">'enemy'</span></div><div class="line">        player.p.tagged = <span class="literal">true</span>;</div><div class="line">        stage.insert(player);</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        player = <span class="keyword">new</span> Q.Player(&#123; playerId: selfId, x: <span class="number">100</span>, y: <span class="number">100</span>, socket: socket &#125;);</div><div class="line">        stage.insert(player);</div><div class="line">        player.trigger(<span class="string">'join'</span>);</div><div class="line">      &#125;</div><div class="line">      stage.add(<span class="string">'viewport'</span>).follow(player);</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'updated'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> actor = players.filter(<span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> obj.playerId == data[<span class="string">'playerId'</span>];</div><div class="line">      &#125;)[<span class="number">0</span>];</div><div class="line">      <span class="keyword">if</span> (actor) &#123;</div><div class="line">        actor.player.p.x = data[<span class="string">'x'</span>];</div><div class="line">        actor.player.p.y = data[<span class="string">'y'</span>];</div><div class="line">        actor.player.p.sheet = data[<span class="string">'sheet'</span>];</div><div class="line">        actor.player.p.opacity = data[<span class="string">'opacity'</span>];</div><div class="line">        actor.player.p.invincible = data[<span class="string">'invincible'</span>];</div><div class="line">        actor.player.p.tagged = data[<span class="string">'tagged'</span>];</div><div class="line">        actor.player.p.update = <span class="literal">true</span>;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> temp = <span class="keyword">new</span> Q.Actor(&#123; playerId: data[<span class="string">'playerId'</span>], x: data[<span class="string">'x'</span>], y: data[<span class="string">'y'</span>], sheet: data[<span class="string">'sheet'</span>], opacity: data[<span class="string">'opacity'</span>], invincible: data[<span class="string">'invincible'</span>], tagged: data[<span class="string">'tagged'</span>] &#125;);</div><div class="line">        players.push(&#123; player: temp, playerId: data[<span class="string">'playerId'</span>] &#125;);</div><div class="line">        stage.insert(temp);</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line"> </div><div class="line">    socket.on(<span class="string">'tagged'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (data[<span class="string">'playerId'</span>] == selfId) &#123;</div><div class="line">        player.p.sheet = <span class="string">'enemy'</span>;</div><div class="line">        player.p.tagged = <span class="literal">true</span>;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> actor = players.filter(<span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</div><div class="line">          <span class="keyword">return</span> obj.playerId == data[<span class="string">'playerId'</span>];</div><div class="line">        &#125;)[<span class="number">0</span>];</div><div class="line">        <span class="keyword">if</span> (actor) &#123;</div><div class="line">          actor.player.p.sheet = <span class="string">'enemy'</span></div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><strong>Line 3:</strong> On our client side we’ll store all of our other players in an array of Quintus player objects. This will make it easier to update all of the other players when we get information from the server.</p>
+<p><strong>Line 4:</strong> Set our client socket to listen on port 8080.</p>
+<p><strong>Line 6:</strong> Here we instantiate the vars <code>selfId</code> and <code>player</code>, which refer to the <code>playerId</code> and <code>Player</code> object of ourselves respectively.</p>
+<p><strong>Lines 20-29:</strong> If our <code>connected</code> event is passed in with the <code>data[&#39;tagged&#39;]</code> object property (Look at the app.js we wrote above!), we’ll create a new <code>Player</code> and set it to a tagger. Otherwise, we’ll just create a new <code>Player</code>. Note that we set our <code>selfId</code> and <code>player</code> object to the <code>Player</code> created in this function, because the <code>connected</code> event is only emitted to our own client. This way we can separate the <code>Actor</code> and <code>Player</code> classes as we’ve talked about before and have our keys only control the <code>Player</code> class.</p>
+<p><strong>Line 33:</strong> Have our socket listen for <code>updated</code> events, which we wrote above in our app.js code. As we saw from before, the <code>updated</code> event will be passed in with a data object filled with all the new properties of another player.</p>
+<p><strong>Lines 34-36:</strong> Filter through our <code>players</code> array that we created before and find the one with the same <code>playerId</code> as that passed in by the data object. Since <code>filter</code> returns an array and we can assume it only has one <code>Actor</code>, we’ll just always grab the element at index 0.</p>
+<p><strong>Lines 37-44:</strong> If our actor was found, we can just update all of its properties with that of the data object.</p>
+<p><strong>Lines 45-48:</strong> If not, that means that they recently connected and we are just starting to receive update events from them, so we create a new <code>Actor</code> and push it into the <code>players</code> array.</p>
+<p><strong>Line 52:</strong> Listen for <code>tagged</code> events, which will be emitted to the everyone in the game.</p>
+<p><strong>Lines 53-55:</strong> If the player being tagged is ourselves, we’ll use our <code>player</code> reference to easily update our properties.</p>
+<p><strong>Lines 56-62:</strong> Otherwise, we’ll filter through our <code>players</code> array like before and update the properties on the appropriate <code>Actor</code>.</p>
+<h2 id="Finishing-up-and-deploying-on-your-server"><a href="#Finishing-up-and-deploying-on-your-server" class="headerlink" title="Finishing up and deploying on your server"></a>Finishing up and deploying on your server</h2><p>Now that you have everything working, it’s time to put this bad boy on the internet!</p>
+<p>Once you have the IP of wherever your project will be hosted, you need to change this line of code on the client so that it can connect to our server.</p>
+<figure class="highlight plain"><figcaption><span>game.js lang: javascript</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var socket = io.connect(&apos;http://104.131.190.55:8080&apos;);</div></pre></td></tr></table></figure>
+<p>For this small project, I’m using <a href="https://www.digitalocean.com/" target="_blank" rel="external">Digital Ocean</a> to set up a game quickly. Just create a droplet and go into the console. We don’t need to install much, just node, npm package manager, and git if you aren’t going to do something like ssh/ftp your files over to your server directly.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install node</div><div class="line">$ sudo apt-get install npm</div></pre></td></tr></table></figure>
+<p>Then switch into your www folder and create your project folder.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ git init</div><div class="line">$ git remote add origin (git url)</div><div class="line">$ git pull origin master</div><div class="line">$ nodejs app.js</div><div class="line">Multiplayer app listening on port 80</div></pre></td></tr></table></figure>
+<p>Well, thanks for joining me on my first blog tutorial! I hope you had as much fun as I did learning Quintus &amp; Socket.io. Also, if at any point in my tutorials I don’t fully explain something or you found a better way to do something, by all means comment on my posts and let me know!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/" data-id="ciroop6he00018gvfbrt97vti" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tutorial/">Tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/01/24/Pennapps-2015/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Pennapps 2015
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/30/Learning-Unity/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Learning Unity</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Friendship/">Friendship</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Life/">Life</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MHacks/">MHacks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Myo/">Myo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Oculus-Rift/">Oculus Rift</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pennapps/">Pennapps</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ping-ping/">Ping ping</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Progress/">Progress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SurgeonSimulator/">SurgeonSimulator</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tutorial/">Tutorial</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Unity/">Unity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Wearable/">Wearable</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Friendship/" style="font-size: 10px;">Friendship</a> <a href="/tags/Life/" style="font-size: 10px;">Life</a> <a href="/tags/MHacks/" style="font-size: 10px;">MHacks</a> <a href="/tags/Myo/" style="font-size: 15px;">Myo</a> <a href="/tags/Node-js/" style="font-size: 20px;">Node.js</a> <a href="/tags/Oculus-Rift/" style="font-size: 10px;">Oculus Rift</a> <a href="/tags/Pennapps/" style="font-size: 10px;">Pennapps</a> <a href="/tags/Ping-ping/" style="font-size: 10px;">Ping ping</a> <a href="/tags/Progress/" style="font-size: 10px;">Progress</a> <a href="/tags/Quintus/" style="font-size: 20px;">Quintus</a> <a href="/tags/Socket-io/" style="font-size: 20px;">Socket.io</a> <a href="/tags/SurgeonSimulator/" style="font-size: 10px;">SurgeonSimulator</a> <a href="/tags/Tutorial/" style="font-size: 20px;">Tutorial</a> <a href="/tags/Unity/" style="font-size: 15px;">Unity</a> <a href="/tags/Wearable/" style="font-size: 10px;">Wearable</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/10/On-Friendship/">On Friendship</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/sprites/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/10/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/arena/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2015/01/24/Pennapps-2015/">Pennapps 2015</a>
+          </li>
+        
+          <li>
+            <a href="/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/">Creating an online multiplayer web game using Socket.io and Quintus Part 3</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Michael Liu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
