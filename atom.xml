@@ -4,9 +4,9 @@
   <subtitle>A blog by Michael Liu</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://mliu95.github.io/"/>
+  <link href="http://mliu.github.io/"/>
   <updated>2016-08-10T16:58:00.304Z</updated>
-  <id>http://mliu95.github.io/</id>
+  <id>http://mliu.github.io/</id>
   
   <author>
     <name>Michael Liu</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>On Friendship</title>
-    <link href="http://mliu95.github.io/2016/08/10/On-Friendship/"/>
-    <id>http://mliu95.github.io/2016/08/10/On-Friendship/</id>
+    <link href="http://mliu.github.io/2016/08/10/On-Friendship/"/>
+    <id>http://mliu.github.io/2016/08/10/On-Friendship/</id>
     <published>2016-08-10T09:03:14.000Z</published>
     <updated>2016-08-10T16:58:00.304Z</updated>
     
@@ -37,23 +37,23 @@
     </summary>
     
     
-      <category term="Life" scheme="http://mliu95.github.io/tags/Life/"/>
+      <category term="Life" scheme="http://mliu.github.io/tags/Life/"/>
     
-      <category term="Friendship" scheme="http://mliu95.github.io/tags/Friendship/"/>
+      <category term="Friendship" scheme="http://mliu.github.io/tags/Friendship/"/>
     
   </entry>
   
   <entry>
     <title>Pennapps 2015</title>
-    <link href="http://mliu95.github.io/2015/01/24/Pennapps-2015/"/>
-    <id>http://mliu95.github.io/2015/01/24/Pennapps-2015/</id>
+    <link href="http://mliu.github.io/2015/01/24/Pennapps-2015/"/>
+    <id>http://mliu.github.io/2015/01/24/Pennapps-2015/</id>
     <published>2015-01-25T00:42:14.000Z</published>
     <updated>2016-08-10T08:59:13.731Z</updated>
     
     <content type="html"><![CDATA[<p>(Note: This has been sitting in my drafts for too long, decided releasing it later was better than never doing it at all)</p>
 <p>This last weekend I went to UPenn to participate in the 2015 Pennapps hackathon with another friend. Going into the event, we had no idea of what we wanted to build and little experience with the hardware we picked up. After brainstorming for a few hours, we decided to make a virtual reality Fruit Ninja game using the Oculus Rift and a Myo. 48 hours later, while giving a demo of our game to over a thousand people, we ran into one of my most dreaded fears: technical difficulties.</p>
 <div class="video-container"><iframe src="//www.youtube.com/embed/ur1SwEgUEVE" frameborder="0" allowfullscreen></iframe></div>
-<p>In the end the moment of sheer panic was worth it, we ended up taking third place. Unfortunately, not owning a Myo and Oculus Rift leave me unable to continue working on the game. If you want a copy of the code, shoot me an email @ <a href="&#109;&#97;&#105;&#x6c;&#x74;&#111;&#x3a;&#104;&#101;&#x6c;&#x6c;&#111;&#x40;&#109;&#105;&#x63;&#x68;&#97;&#x65;&#x6c;&#x79;&#x6c;&#x69;&#117;&#x2e;&#x63;&#111;&#109;">&#104;&#101;&#x6c;&#x6c;&#111;&#x40;&#109;&#105;&#x63;&#x68;&#97;&#x65;&#x6c;&#x79;&#x6c;&#x69;&#117;&#x2e;&#x63;&#111;&#109;</a></p>
+<p>In the end the moment of sheer panic was worth it, we ended up taking third place. Unfortunately, not owning a Myo and Oculus Rift leave me unable to continue working on the game. If you want a copy of the code, shoot me an email @ <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x68;&#x65;&#x6c;&#x6c;&#111;&#x40;&#109;&#x69;&#x63;&#104;&#x61;&#101;&#108;&#x79;&#x6c;&#x69;&#117;&#46;&#99;&#111;&#109;">&#x68;&#x65;&#x6c;&#x6c;&#111;&#x40;&#109;&#x69;&#x63;&#104;&#x61;&#101;&#108;&#x79;&#x6c;&#x69;&#117;&#46;&#99;&#111;&#109;</a></p>
 ]]></content>
     
     <summary type="html">
@@ -64,27 +64,27 @@
     </summary>
     
     
-      <category term="Myo" scheme="http://mliu95.github.io/tags/Myo/"/>
+      <category term="Myo" scheme="http://mliu.github.io/tags/Myo/"/>
     
-      <category term="Unity" scheme="http://mliu95.github.io/tags/Unity/"/>
+      <category term="Unity" scheme="http://mliu.github.io/tags/Unity/"/>
     
-      <category term="Pennapps" scheme="http://mliu95.github.io/tags/Pennapps/"/>
+      <category term="Pennapps" scheme="http://mliu.github.io/tags/Pennapps/"/>
     
-      <category term="Oculus Rift" scheme="http://mliu95.github.io/tags/Oculus-Rift/"/>
+      <category term="Oculus Rift" scheme="http://mliu.github.io/tags/Oculus-Rift/"/>
     
   </entry>
   
   <entry>
     <title>Creating an online multiplayer web game using Socket.io and Quintus Part 3</title>
-    <link href="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/"/>
-    <id>http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/</id>
+    <link href="http://mliu.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/"/>
+    <id>http://mliu.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3/</id>
     <published>2014-11-15T03:52:38.000Z</published>
     <updated>2016-08-10T08:59:13.663Z</updated>
     
     <content type="html"><![CDATA[<p>Here’s a quick demo of our finished game:</p>
 <iframe style="width:98%;" height="500" src="http://104.167.115.218:8080/" allowfullscreen></iframe>
 
-<p><a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2">Last post</a>, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the final part of our app, which is adding the code to let our players tag each other.</p>
+<p><a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2" target="_blank" rel="external">Last post</a>, I showed up how to set up basic Socketio interaction with Quintus to allow for multiple people to join a game of tag. Now, let’s work on the final part of our app, which is adding the code to let our players tag each other.</p>
 <h2 id="Player-Class"><a href="#Player-Class" class="headerlink" title="Player Class"></a>Player Class</h2><p>Let’s add some properties and event listeners to our player class</p>
 <figure class="highlight javascript"><figcaption><span>player.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">Q.Sprite.extend(<span class="string">'Player'</span>, &#123;</div><div class="line">    init: <span class="function"><span class="keyword">function</span> (<span class="params">p</span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>._super(p, &#123;</div><div class="line">        sheet: <span class="string">'player'</span>,</div><div class="line">        tagged: <span class="literal">false</span>,</div><div class="line">        invincible: <span class="literal">false</span>,</div><div class="line">        vyMult: <span class="number">1</span></div><div class="line">      &#125;);</div><div class="line">      <span class="keyword">this</span>.add(<span class="string">'2d, platformerControls, animation'</span>);</div><div class="line"> </div><div class="line">      <span class="keyword">this</span>.addEventListeners();</div><div class="line">    &#125;,</div><div class="line">    addEventListeners: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.on(<span class="string">'hit'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">collision</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.p.tagged &amp;&amp; collision.obj.isA(<span class="string">'Actor'</span>) &amp;&amp; !collision.obj.p.tagged &amp;&amp; !collision.obj.p.invincible) &#123;</div><div class="line">          <span class="keyword">this</span>.p.socket.emit(<span class="string">'tag'</span>, &#123; playerId: collision.obj.p.playerId &#125;);</div><div class="line">          <span class="keyword">this</span>.p.tagged = <span class="literal">false</span>;</div><div class="line">          <span class="keyword">this</span>.p.sheet = <span class="string">'player'</span>;</div><div class="line">          <span class="keyword">this</span>.p.invincible = <span class="literal">true</span>;</div><div class="line">          <span class="keyword">this</span>.p.opacity = <span class="number">0.5</span>;</div><div class="line">          <span class="keyword">this</span>.p.speed = <span class="number">300</span>;</div><div class="line">          <span class="keyword">this</span>.p.vyMult = <span class="number">1.5</span>;</div><div class="line">          <span class="keyword">var</span> temp = <span class="keyword">this</span>;</div><div class="line">          setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            temp.p.invincible = <span class="literal">false</span>;</div><div class="line">            temp.p.opacity = <span class="number">1</span>;</div><div class="line">            temp.p.speed = <span class="number">200</span>;</div><div class="line">            temp.p.vyMult = <span class="number">1</span>;</div><div class="line">          &#125;, <span class="number">3000</span>);</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line"> </div><div class="line">      <span class="keyword">this</span>.on(<span class="string">'join'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.p.invincible = <span class="literal">true</span>;</div><div class="line">        <span class="keyword">this</span>.p.opacity = <span class="number">0.5</span>;</div><div class="line">        <span class="keyword">this</span>.p.speed = <span class="number">300</span>;</div><div class="line">        <span class="keyword">this</span>.p.vyMult = <span class="number">1.5</span>;</div><div class="line">        <span class="keyword">var</span> temp = <span class="keyword">this</span>;</div><div class="line">        setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">          temp.p.invincible = <span class="literal">false</span>;</div><div class="line">          temp.p.opacity = <span class="number">1</span>;</div><div class="line">          temp.p.speed = <span class="number">200</span>;</div><div class="line">          temp.p.vyMult = <span class="number">1</span>;</div><div class="line">        &#125;, <span class="number">3000</span>);</div><div class="line">      &#125;);</div><div class="line">    &#125;,</div></pre></td></tr></table></figure>
 <a id="more"></a>
@@ -139,20 +139,20 @@
     </summary>
     
     
-      <category term="Node.js" scheme="http://mliu95.github.io/tags/Node-js/"/>
+      <category term="Node.js" scheme="http://mliu.github.io/tags/Node-js/"/>
     
-      <category term="Socket.io" scheme="http://mliu95.github.io/tags/Socket-io/"/>
+      <category term="Socket.io" scheme="http://mliu.github.io/tags/Socket-io/"/>
     
-      <category term="Quintus" scheme="http://mliu95.github.io/tags/Quintus/"/>
+      <category term="Quintus" scheme="http://mliu.github.io/tags/Quintus/"/>
     
-      <category term="Tutorial" scheme="http://mliu95.github.io/tags/Tutorial/"/>
+      <category term="Tutorial" scheme="http://mliu.github.io/tags/Tutorial/"/>
     
   </entry>
   
   <entry>
     <title>Learning Unity</title>
-    <link href="http://mliu95.github.io/2014/09/30/Learning-Unity/"/>
-    <id>http://mliu95.github.io/2014/09/30/Learning-Unity/</id>
+    <link href="http://mliu.github.io/2014/09/30/Learning-Unity/"/>
+    <id>http://mliu.github.io/2014/09/30/Learning-Unity/</id>
     <published>2014-09-30T19:25:41.000Z</published>
     <updated>2016-08-10T08:59:13.725Z</updated>
     
@@ -171,18 +171,18 @@
     </summary>
     
     
-      <category term="Unity" scheme="http://mliu95.github.io/tags/Unity/"/>
+      <category term="Unity" scheme="http://mliu.github.io/tags/Unity/"/>
     
-      <category term="Ping ping" scheme="http://mliu95.github.io/tags/Ping-ping/"/>
+      <category term="Ping ping" scheme="http://mliu.github.io/tags/Ping-ping/"/>
     
-      <category term="Progress" scheme="http://mliu95.github.io/tags/Progress/"/>
+      <category term="Progress" scheme="http://mliu.github.io/tags/Progress/"/>
     
   </entry>
   
   <entry>
     <title>Developing on a Myo for MHacks</title>
-    <link href="http://mliu95.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/"/>
-    <id>http://mliu95.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/</id>
+    <link href="http://mliu.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/"/>
+    <id>http://mliu.github.io/2014/09/28/Developing-on-a-Myo-for-MHacks/</id>
     <published>2014-09-28T21:26:20.000Z</published>
     <updated>2016-08-10T08:59:13.697Z</updated>
     
@@ -210,26 +210,26 @@
     </summary>
     
     
-      <category term="Myo" scheme="http://mliu95.github.io/tags/Myo/"/>
+      <category term="Myo" scheme="http://mliu.github.io/tags/Myo/"/>
     
-      <category term="MHacks" scheme="http://mliu95.github.io/tags/MHacks/"/>
+      <category term="MHacks" scheme="http://mliu.github.io/tags/MHacks/"/>
     
-      <category term="SurgeonSimulator" scheme="http://mliu95.github.io/tags/SurgeonSimulator/"/>
+      <category term="SurgeonSimulator" scheme="http://mliu.github.io/tags/SurgeonSimulator/"/>
     
-      <category term="Android" scheme="http://mliu95.github.io/tags/Android/"/>
+      <category term="Android" scheme="http://mliu.github.io/tags/Android/"/>
     
-      <category term="Wearable" scheme="http://mliu95.github.io/tags/Wearable/"/>
+      <category term="Wearable" scheme="http://mliu.github.io/tags/Wearable/"/>
     
   </entry>
   
   <entry>
     <title>Creating an online multiplayer web game using Socket.io and Quintus Part 2</title>
-    <link href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/"/>
-    <id>http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/</id>
+    <link href="http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/"/>
+    <id>http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/</id>
     <published>2014-09-17T00:55:48.000Z</published>
     <updated>2016-08-10T08:59:13.595Z</updated>
     
-    <content type="html"><![CDATA[<p>In the <a href="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/#more">previous post</a>, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t make all that much sense.</p>
+    <content type="html"><![CDATA[<p>In the <a href="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/#more" target="_blank" rel="external">previous post</a>, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t make all that much sense.</p>
 <h2 id="Socket-io"><a href="#Socket-io" class="headerlink" title="Socket.io"></a>Socket.io</h2><h3 id="Listening-for-connections-disconnects"><a href="#Listening-for-connections-disconnects" class="headerlink" title="Listening for connections/disconnects"></a>Listening for connections/disconnects</h3><p>We’ll write the code to monitor connections and disconnects on our server-side <code>app.js</code>:</p>
 <figure class="highlight javascript"><figcaption><span>app.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">  res.render(<span class="string">'/index.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> playerCount = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> id = <span class="number">0</span>;</div><div class="line"> </div><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;</div><div class="line">  playerCount++;</div><div class="line">  id++;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    socket.emit(<span class="string">'connected'</span>, &#123; playerId: id &#125;);</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;, <span class="number">1500</span>);</div><div class="line"> </div><div class="line">  socket.on(<span class="string">'disconnect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    playerCount--;</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">server.listen(<span class="number">80</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Multiplayer app listening on port 80"</span>);</div></pre></td></tr></table></figure>
 <p><strong>Lines 6-7:</strong> Declaring variables that are used to track the number of players and assign a unique id for each player respectively.</p>
@@ -270,7 +270,7 @@
 <p><strong>Lines 10-13:</strong> Else, we just create a new <code>Actor</code> class for that player, push it onto our <code>players</code> array, and insert it into the stage.</p>
 <h3 id="Run-it"><a href="#Run-it" class="headerlink" title="Run it!"></a>Run it!</h3><p><img src="seeingdouble.png" alt="Whoa x 2!!!"></p>
 <p>Run your node application once again. You’ll see that if you join your server from multiple tabs, there should be players popping up for them! Movement should be updating as well, although for certain browsers like Chrome you need to keep each tab in its own window (Javascript loses focus when it’s not the current tab, so it won’t be able to update if you’re focused on another game tab in the same window). Try getting a family/friend to join the same port and they should be able to run around with you!</p>
-<p>In my <a href="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3">next blog post</a>, I’ll show you how to get the tagging logic down. Keep an eye out!</p>
+<p>In my <a href="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3" target="_blank" rel="external">next blog post</a>, I’ll show you how to get the tagging logic down. Keep an eye out!</p>
 ]]></content>
     
     <summary type="html">
@@ -284,20 +284,20 @@
     </summary>
     
     
-      <category term="Node.js" scheme="http://mliu95.github.io/tags/Node-js/"/>
+      <category term="Node.js" scheme="http://mliu.github.io/tags/Node-js/"/>
     
-      <category term="Socket.io" scheme="http://mliu95.github.io/tags/Socket-io/"/>
+      <category term="Socket.io" scheme="http://mliu.github.io/tags/Socket-io/"/>
     
-      <category term="Quintus" scheme="http://mliu95.github.io/tags/Quintus/"/>
+      <category term="Quintus" scheme="http://mliu.github.io/tags/Quintus/"/>
     
-      <category term="Tutorial" scheme="http://mliu95.github.io/tags/Tutorial/"/>
+      <category term="Tutorial" scheme="http://mliu.github.io/tags/Tutorial/"/>
     
   </entry>
   
   <entry>
     <title>Creating an online multiplayer web game using Socket.io and Quintus Part 1</title>
-    <link href="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/"/>
-    <id>http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/</id>
+    <link href="http://mliu.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/"/>
+    <id>http://mliu.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/</id>
     <published>2014-07-13T21:17:56.000Z</published>
     <updated>2016-08-10T09:55:24.584Z</updated>
     
@@ -352,7 +352,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> quintus-tag</div><div class="line">$ node app.js</div></pre></td></tr></table></figure>
 <p>Then open up your web browser and go to <code>localhost:8080</code>. If everything’s working, you should see something like this:</p>
 <p><img src="voila.png" alt="Whoa!"></p>
-<p>Boom! Our player can move in all directions and collides with the walls. In the next part of this tutorial, we’ll start looking into integrating our Quintus game with Socket.io. <a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2">Check it out here!</a> Thanks for reading!</p>
+<p>Boom! Our player can move in all directions and collides with the walls. In the next part of this tutorial, we’ll start looking into integrating our Quintus game with Socket.io. <a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2" target="_blank" rel="external">Check it out here!</a> Thanks for reading!</p>
 ]]></content>
     
     <summary type="html">
@@ -371,20 +371,20 @@
     </summary>
     
     
-      <category term="Node.js" scheme="http://mliu95.github.io/tags/Node-js/"/>
+      <category term="Node.js" scheme="http://mliu.github.io/tags/Node-js/"/>
     
-      <category term="Socket.io" scheme="http://mliu95.github.io/tags/Socket-io/"/>
+      <category term="Socket.io" scheme="http://mliu.github.io/tags/Socket-io/"/>
     
-      <category term="Quintus" scheme="http://mliu95.github.io/tags/Quintus/"/>
+      <category term="Quintus" scheme="http://mliu.github.io/tags/Quintus/"/>
     
-      <category term="Tutorial" scheme="http://mliu95.github.io/tags/Tutorial/"/>
+      <category term="Tutorial" scheme="http://mliu.github.io/tags/Tutorial/"/>
     
   </entry>
   
   <entry>
     <title>Hello, World! It&#39;s Michael.</title>
-    <link href="http://mliu95.github.io/2014/07/13/Hello,-World!/"/>
-    <id>http://mliu95.github.io/2014/07/13/Hello,-World!/</id>
+    <link href="http://mliu.github.io/2014/07/13/Hello,-World!/"/>
+    <id>http://mliu.github.io/2014/07/13/Hello,-World!/</id>
     <published>2014-07-13T17:40:57.000Z</published>
     <updated>2016-08-10T08:59:13.714Z</updated>
     

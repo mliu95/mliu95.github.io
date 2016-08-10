@@ -8,15 +8,15 @@
   <meta name="description" content="In the previous post, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 2">
-<meta property="og:url" content="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/index.html">
+<meta property="og:url" content="http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/index.html">
 <meta property="og:site_name" content="Liucode">
 <meta property="og:description" content="In the previous post, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t">
-<meta property="og:image" content="http://mliu95.github.io/seeingdouble.png">
+<meta property="og:image" content="http://mliu.github.io/seeingdouble.png">
 <meta property="og:updated_time" content="2016-08-10T08:59:13.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating an online multiplayer web game using Socket.io and Quintus Part 2">
 <meta name="twitter:description" content="In the previous post, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t">
-<meta name="twitter:image" content="http://mliu95.github.io/seeingdouble.png">
+<meta name="twitter:image" content="http://mliu.github.io/seeingdouble.png">
   
     <link rel="alternate" href="/atom.xml" title="Liucode" type="application/atom+xml">
   
@@ -61,7 +61,7 @@
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://mliu95.github.io"></form>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://mliu.github.io"></form>
       </div>
     </div>
   </div>
@@ -89,7 +89,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>In the <a href="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/#more">previous post</a>, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t make all that much sense.</p>
+        <p>In the <a href="http://mliu95.github.io/2014/07/13/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part1/#more" target="_blank" rel="external">previous post</a>, I talked about how to set up Quintus and Node.js for a simple single player web game. Unfortunately, because we’re coding up a game of tag, keeping our game single player doesn’t make all that much sense.</p>
 <h2 id="Socket-io"><a href="#Socket-io" class="headerlink" title="Socket.io"></a>Socket.io</h2><h3 id="Listening-for-connections-disconnects"><a href="#Listening-for-connections-disconnects" class="headerlink" title="Listening for connections/disconnects"></a>Listening for connections/disconnects</h3><p>We’ll write the code to monitor connections and disconnects on our server-side <code>app.js</code>:</p>
 <figure class="highlight javascript"><figcaption><span>app.js</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</div><div class="line">  res.render(<span class="string">'/index.html'</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line"><span class="keyword">var</span> playerCount = <span class="number">0</span>;</div><div class="line"><span class="keyword">var</span> id = <span class="number">0</span>;</div><div class="line"> </div><div class="line">io.on(<span class="string">'connection'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">socket</span>) </span>&#123;</div><div class="line">  playerCount++;</div><div class="line">  id++;</div><div class="line">  setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    socket.emit(<span class="string">'connected'</span>, &#123; playerId: id &#125;);</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;, <span class="number">1500</span>);</div><div class="line"> </div><div class="line">  socket.on(<span class="string">'disconnect'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    playerCount--;</div><div class="line">    io.emit(<span class="string">'count'</span>, &#123; playerCount: playerCount &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">server.listen(<span class="number">80</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Multiplayer app listening on port 80"</span>);</div></pre></td></tr></table></figure>
 <p><strong>Lines 6-7:</strong> Declaring variables that are used to track the number of players and assign a unique id for each player respectively.</p>
@@ -130,14 +130,14 @@
 <p><strong>Lines 10-13:</strong> Else, we just create a new <code>Actor</code> class for that player, push it onto our <code>players</code> array, and insert it into the stage.</p>
 <h3 id="Run-it"><a href="#Run-it" class="headerlink" title="Run it!"></a>Run it!</h3><p><img src="seeingdouble.png" alt="Whoa x 2!!!"></p>
 <p>Run your node application once again. You’ll see that if you join your server from multiple tabs, there should be players popping up for them! Movement should be updating as well, although for certain browsers like Chrome you need to keep each tab in its own window (Javascript loses focus when it’s not the current tab, so it won’t be able to update if you’re focused on another game tab in the same window). Try getting a family/friend to join the same port and they should be able to run around with you!</p>
-<p>In my <a href="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3">next blog post</a>, I’ll show you how to get the tagging logic down. Keep an eye out!</p>
+<p>In my <a href="http://mliu95.github.io/2014/11/14/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part3" target="_blank" rel="external">next blog post</a>, I’ll show you how to get the tagging logic down. Keep an eye out!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/" data-id="cirp5bkqh0003fgvfpssg4r1h" class="article-share-link">Share</a>
+      <a data-url="http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/" data-id="cirp85vvq0003ksvfuxw7mt45" class="article-share-link">Share</a>
       
-        <a href="http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/#disqus_thread" class="article-comment-link">Comments</a>
+        <a href="http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/#disqus_thread" class="article-comment-link">Comments</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Node-js/">Node.js</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Quintus/">Quintus</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Socket-io/">Socket.io</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tutorial/">Tutorial</a></li></ul>
@@ -265,7 +265,7 @@
 <script>
   var disqus_shortname = 'liucode';
   
-  var disqus_url = 'http://mliu95.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/';
+  var disqus_url = 'http://mliu.github.io/2014/09/16/Creating-an-online-multiplayer-web-game-using-Socketio-and-Quintus-Part2/';
   
   (function(){
     var dsq = document.createElement('script');
